@@ -1,0 +1,26 @@
+.DashboardPage {
+  &-sidebar {
+    background-color: red;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    width: 20%;
+    border-right: 1px solid #eee;
+    &-links {
+      background-color: green;
+      li {
+        list-style-type: none;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+  &-main {
+    margin-left: 25%;
+    margin-top: 1.75rem;
+    margin-right: 10%;
+  }
+}
