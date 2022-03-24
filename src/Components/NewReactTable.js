@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { useTable } from "react-table";
-import useApi from "../CustomHooks/useApi";
 import useNewApi from "../CustomHooks/useNewApi";
+import DelModal from "./DelModal";
 
 const NewReactTable = (props) => {
+  var i = 0;
   const { num, url } = props;
   const [value, setValue] = useState(null);
-  const { getData, apiData } = useNewApi();
-  // const { apiData, getData } = useApi(url);
+  const { getData, apiData, delData } = useNewApi();
+
+  const [id, setId] = useState(null);
 
   useEffect(() => {
-    setValue(getData(url));
-  }, []);
-
-  useEffect(() => {
+    setValue(apiData);
     console.log(apiData);
-  }, apiData);
+  }, [apiData]);
+
+  useEffect(() => {
+    getData(url);
+    if (id !== null) {
+      // console.log(id);
+      delData(id);
+      getData(url);
+      console.log("whatttttt");
+    }
+  }, id);
 
   const values = [
     {
@@ -31,81 +39,48 @@ const NewReactTable = (props) => {
       description: "Description",
     },
   ];
-  const data = React.useMemo(
-    () => [{ col1: 1, col2: "name", col3: "Email", col4: "Buttons" }],
-    []
-  );
-
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "S.N",
-        accessor: "col1", // accessor is the "key" in the data
-      },
-      {
-        Header: values[num].title,
-        accessor: "col2",
-      },
-      {
-        Header: values[num].description,
-        accessor: "col3",
-      },
-      {
-        Header: "Actions",
-        accessor: "col4",
-      },
-    ],
-    []
-  );
-
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
 
   return (
-    <table {...getTableProps()} style={{ border: "solid 2px black" }}>
-      <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th
-                {...column.getHeaderProps()}
-                style={{
-                  border: "solid 2px red",
-                  background: "aliceblue",
-                  color: "black",
-                  fontWeight: "bold",
-                }}
-              >
-                {column.render("Header")}
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
+    <>
+      {value !== null ? (
+        <div>
+          <table class="table mt-5">
+            <thead>
+              <tr>
+                <th scope="col-1">S.N</th>
+                <th scope="col-4">{values[num].title}</th>
+                <th scope="col-4">{values[num].description}</th>
+                <th scope="col-3">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {value.data.map((item) => {
+                {
+                  i++;
+                }
                 return (
-                  <td
-                    {...cell.getCellProps()}
-                    style={{
-                      padding: "10px",
-                      border: "solid 1px gray",
-                      background: "papayawhip",
-                    }}
-                  >
-                    {cell.render("Cell")}
-                  </td>
+                  <tr>
+                    <th>{i}</th>
+                    <td>{item.name}</td>
+                    <td>{item.description}</td>
+                    <td>
+                      <DelModal
+                        url={url}
+                        name={item.name}
+                        id={item.id}
+                        setId={setId}
+                      />
+                    </td>
+                  </tr>
                 );
               })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <h2>Loading....</h2>
+      )}
+    </>
   );
 };
 

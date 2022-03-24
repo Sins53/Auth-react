@@ -5,7 +5,7 @@ import useNewApi from "../CustomHooks/useNewApi";
 
 const AddModal = (props) => {
   // const [data, setData] = useState(null);
-  const { postData } = useNewApi();
+  const { postData, getData } = useNewApi();
   // const [message, setMessage] = useState(null);
 
   // useEffect(() => {
@@ -85,6 +85,7 @@ const AddModal = (props) => {
     var description = sdescription.current.value;
     // setData({ name, description });
     postData("screens", { name, description });
+    getData("screens");
   };
 
   return (

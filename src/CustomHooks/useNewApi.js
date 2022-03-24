@@ -4,7 +4,7 @@ const useNewApi = () => {
   const baseUrl = "https://ecom-react-task.herokuapp.com/";
   const isToken = localStorage.getItem("token");
 
-  const [apiData, setApiData] = useState(undefined);
+  const [apiData, setApiData] = useState(null);
 
   var token = null;
   // var apiData = null;
@@ -42,9 +42,9 @@ const useNewApi = () => {
     // console.log(apiData, "----------------------");
   }
 
-  function delData(url) {
+  async function delData(url) {
     if (isToken !== null) {
-      fetch(baseUrl + url, {
+      await fetch(baseUrl + url, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -56,6 +56,7 @@ const useNewApi = () => {
         .then((response) => response.json())
         .then((data) => {
           alert(data.message);
+          // console.log(data.message);
         });
     }
   }
