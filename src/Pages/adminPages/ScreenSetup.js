@@ -1,6 +1,7 @@
 import React from "react";
 import AddModal from "../../Components/AddModal";
-import ReactTable from "../../Components/ReactTable";
+import NewReactTable from "../../Components/NewReactTable";
+import DelModal from "../../Components/DelModal";
 
 const ScreenSetup = () => {
   return (
@@ -11,7 +12,8 @@ const ScreenSetup = () => {
       <div className="text-end">
         <AddModal name={"Screen"} />
       </div>
-      <ReactTable num={2} url={"screens"} method={"GET"} />
+      <NewReactTable num={2} url={"screens"} />
+      <DelModal url={"screens/f7f71a95-ce2c-4a83-a769-226192d20806"} />
     </>
   );
 };

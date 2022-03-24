@@ -5,6 +5,7 @@ import useFetch from "../CustomHooks/useFetch";
 const LoginPage = () => {
   const [body, setBody] = useState(null);
   const [token] = useFetch("auth/login", "POST", body);
+
   let navigate = useNavigate();
   const name = useRef(null);
   const pswd = useRef(null);

@@ -1,7 +1,9 @@
 import React from "react";
 import { FaTrashAlt } from "react-icons/fa";
+import useNewApi from "../CustomHooks/useNewApi";
 
 const DelModal = (props) => {
+  const { delData } = useNewApi();
   return (
     <div>
       <i data-bs-toggle="modal" data-bs-target="#DelModal">
@@ -31,7 +33,14 @@ const DelModal = (props) => {
             </div>
             <div className="modal-footer">
               <div className="text-end DelModal-footer">
-                <button className="btn btn-danger">Delete</button>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => {
+                    delData(props.url);
+                  }}
+                >
+                  Delete
+                </button>
                 <button
                   className="btn btn-secondary"
                   data-bs-dismiss="modal"

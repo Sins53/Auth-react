@@ -1,13 +1,21 @@
 import React, { useRef, useState, useEffect } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import useApi from "../CustomHooks/useApi";
+import useNewApi from "../CustomHooks/useNewApi";
+// import useApi from "../CustomHooks/useApi";
 
 const AddModal = (props) => {
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
+  const { postData } = useNewApi();
+  // const [message, setMessage] = useState(null);
+
+  // useEffect(() => {
+  //   if (message) {
+  //     console.log(message);
+  //   }
+  // }, message);
+
   const sname = useRef(null);
   const sdescription = useRef(null);
-
-  console.log(data);
 
   const common = (
     <>
@@ -75,8 +83,8 @@ const AddModal = (props) => {
   const submitData = () => {
     var name = sname.current.value;
     var description = sdescription.current.value;
-    setData({ name, description });
-    console.log(data);
+    // setData({ name, description });
+    postData("screens", { name, description });
   };
 
   return (
