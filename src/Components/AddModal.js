@@ -1,21 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import useNewApi from "../CustomHooks/useNewApi";
-// import useApi from "../CustomHooks/useApi";
 
 const AddModal = (props) => {
-  // const [data, setData] = useState(null);
   const { postData, getData } = useNewApi();
-  // const [message, setMessage] = useState(null);
-
-  // useEffect(() => {
-  //   if (message) {
-  //     console.log(message);
-  //   }
-  // }, message);
 
   const sname = useRef(null);
   const sdescription = useRef(null);
+
+  // const uname = useRef(null);
+  // const uemail = useRef(null);
+  const upswd = useRef(null);
 
   const common = (
     <>
@@ -53,7 +48,7 @@ const AddModal = (props) => {
             <label>Full Name</label>
           </div>
           <div className="col-8">
-            <input type="text" placeholder="Enter Full Name" />
+            <input ref={sname} type="text" placeholder="Enter Full Name" />
           </div>
         </div>
       </div>
@@ -63,7 +58,7 @@ const AddModal = (props) => {
             <label>Email</label>
           </div>
           <div className="col-8">
-            <input type="email" placeholder="Enter Email" />
+            <input ref={sdescription} type="email" placeholder="Enter Email" />
           </div>
         </div>
       </div>
@@ -73,7 +68,7 @@ const AddModal = (props) => {
             <label>Password</label>
           </div>
           <div className="col-8">
-            <input type="text" placeholder="Enter Password" />
+            <input ref={upswd} type="text" placeholder="Enter Password" />
           </div>
         </div>
       </div>
@@ -83,9 +78,15 @@ const AddModal = (props) => {
   const submitData = () => {
     var name = sname.current.value;
     var description = sdescription.current.value;
-    // setData({ name, description });
-    postData("screens", { name, description });
-    getData("screens");
+    postData(props.url, { name, description });
+    // getData(props.url);
+  };
+  const submitUser = () => {
+    var name = sname.current.value;
+    var email = sdescription.current.value;
+    var password = upswd.current.value;
+    postData(props.url, { name, email, password });
+    // console.log(name, email, password);
   };
 
   return (
@@ -130,9 +131,15 @@ const AddModal = (props) => {
             </div>
             <div className="modal-footer">
               <div className="text-end AddModal-footer">
-                <button className="btn btn-primary" onClick={submitData}>
-                  Add
-                </button>
+                {props.extra === true ? (
+                  <button className="btn btn-primary" onClick={submitUser}>
+                    Add User
+                  </button>
+                ) : (
+                  <button className="btn btn-primary" onClick={submitData}>
+                    Add
+                  </button>
+                )}
                 <button
                   className="btn btn-danger"
                   data-bs-dismiss="modal"

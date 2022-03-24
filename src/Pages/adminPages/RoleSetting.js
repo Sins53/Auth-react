@@ -1,6 +1,6 @@
 import React from "react";
 import AddModal from "../../Components/AddModal";
-import ReactTable from "../../Components/ReactTable";
+import NewReactTable from "../../Components/NewReactTable";
 
 const RoleSetting = () => {
   return (
@@ -9,9 +9,9 @@ const RoleSetting = () => {
         <h2>Role Details</h2>
       </div>
       <div className="text-end">
-        <AddModal name={"Role"} />
+        <AddModal name={"Role"} url={"roles"} />
       </div>
-      <ReactTable num={1} url={"roles"} method={"GET"} />
+      <NewReactTable num={1} url={"roles"} />
     </>
   );
 };

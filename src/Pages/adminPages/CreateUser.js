@@ -1,7 +1,7 @@
 import React from "react";
 import AddModal from "../../Components/AddModal";
 import DelModal from "../../Components/DelModal";
-import ReactTable from "../../Components/ReactTable";
+import NewReactTable from "../../Components/NewReactTable";
 
 const CreateUser = () => {
   return (
@@ -10,9 +10,9 @@ const CreateUser = () => {
         <h2>User Setup</h2>
       </div>
       <div className="text-end">
-        <AddModal name={"User"} extra={true} />
+        <AddModal name={"User"} extra={true} url={"user"} />
       </div>
-      <ReactTable num={0} url={"user"} method={"GET"} />
+      <NewReactTable num={0} url={"user"} method={"GET"} />
       <DelModal />
     </>
   );

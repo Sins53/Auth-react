@@ -12,13 +12,12 @@ const NewReactTable = (props) => {
 
   useEffect(() => {
     setValue(apiData);
-    console.log(apiData);
-  }, [apiData]);
+    // console.log(apiData);
+  }, [apiData]); ///why []
 
   useEffect(() => {
     getData(url);
     if (id !== null) {
-      // console.log(id);
       delData(id);
       getData(url);
       console.log("whatttttt");
@@ -62,7 +61,7 @@ const NewReactTable = (props) => {
                   <tr>
                     <th>{i}</th>
                     <td>{item.name}</td>
-                    <td>{item.description}</td>
+                    <td>{item.description ? item.description : item.email}</td>
                     <td>
                       <DelModal
                         url={url}

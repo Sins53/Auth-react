@@ -9,7 +9,7 @@ const ScreenSetup = () => {
         <h2>Screen Details</h2>
       </div>
       <div className="text-end">
-        <AddModal name={"Screen"} />
+        <AddModal name={"Screen"} url={"screens"} />
       </div>
       <NewReactTable num={2} url={"screens"} />
     </>
