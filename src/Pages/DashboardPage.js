@@ -1,20 +1,10 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import CreateUser from "./adminPages/CreateUser";
-import RoleSetting from "./adminPages/RoleSetting";
-import ScreenSetup from "./adminPages/ScreenSetup";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import profilePic from "../assets/images/profile-pic.jpg";
 
 const DashboardPage = () => {
   const [display, setDisplay] = useState("none");
-  const [num, setNum] = useState(0);
   let navigate = useNavigate();
-
-  const DisplayPage = [
-    { id: 0, name: CreateUser },
-    { id: 1, name: RoleSetting },
-    { id: 2, name: ScreenSetup },
-  ];
 
   const toggleDisplay = () => {
     if (display === "none") {
@@ -48,19 +38,13 @@ const DashboardPage = () => {
             <div className="DashboardPage-sidebar-links" style={{ display }}>
               <ul>
                 <li>
-                  <button className="btn" onClick={() => setNum(0)}>
-                    Create User
-                  </button>
+                  <Link to="user/">Create User</Link>
                 </li>
                 <li>
-                  <button className="btn" onClick={() => setNum(1)}>
-                    Role Setting
-                  </button>
+                  <Link to="roles/">Role Setting</Link>
                 </li>
                 <li>
-                  <button className="btn" onClick={() => setNum(2)}>
-                    Screen Setup
-                  </button>
+                  <Link to="screens/">Screen Setup</Link>
                 </li>
               </ul>
             </div>
@@ -72,13 +56,7 @@ const DashboardPage = () => {
           </div>
         </div>
         <div className="DashboardPage-main">
-          {DisplayPage.map((item) => {
-            return item.id === num ? (
-              <div>
-                <item.name />
-              </div>
-            ) : null;
-          })}
+          <Outlet />
         </div>
       </div>
     </div>
