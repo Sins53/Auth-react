@@ -1,4 +1,4 @@
-import { useState } from "react";
+/* import { useState } from "react";
 
 var qwe = null;
 const useApi = (url) => {
@@ -50,3 +50,4 @@ const useApi = (url) => {
 };
 
 export default useApi;
+ */

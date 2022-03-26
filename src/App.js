@@ -5,6 +5,8 @@ import HomePage from "./Pages/HomePage";
 import CreateUser from "./Pages/adminPages/CreateUser";
 import RoleSetting from "./Pages/adminPages/RoleSetting";
 import ScreenSetup from "./Pages/adminPages/ScreenSetup";
+import ProductsPage from "./Pages/ProductsPage";
+import SingleProduct from "./Components/Products/SingleProduct";
 
 function App() {
   const routes = [
@@ -17,6 +19,8 @@ function App() {
     { link: "user/", name: CreateUser },
     { link: "screens/", name: ScreenSetup },
     { link: "roles/", name: RoleSetting },
+    { link: "products/", name: ProductsPage },
+    { link: "/products/:id", name: SingleProduct },
   ];
   return (
     <>

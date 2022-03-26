@@ -26,7 +26,11 @@ const DelModal = (props) => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <div className="DelModal-header">header</div>
+              <div className="DelModal-header">
+                <h3>
+                  Delete <span className="text-uppercase">{url}</span>
+                </h3>
+              </div>
               <button
                 type="button"
                 className="btn-close"
@@ -35,7 +39,10 @@ const DelModal = (props) => {
               ></button>
             </div>
             <div className="modal-body text-center">
-              <h3>Are you sure you want to delete? {props.name}</h3>
+              <h3>Are you sure you want to delete? </h3>
+              <h2 className="text-uppercase text-center text-danger">
+                {props.name}
+              </h2>
             </div>
             <div className="modal-footer">
               <div className={`text-end ${fixedIt + url}-footer`}>

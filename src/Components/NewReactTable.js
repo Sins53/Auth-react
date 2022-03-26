@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import useNewApi from "../CustomHooks/useNewApi";
-import DelModal from "./DelModal";
-import UpdateModal from "./UpdateModal";
+import DelModal from "./BootstrapModalEdited/DelModal";
+import UpdateModal from "./BootstrapModalEdited/UpdateModal";
 
 const NewReactTable = (props) => {
-  var i = 0;
+  var a = "",
+    i = 0;
   const { num, url } = props;
   const [value, setValue] = useState(null);
   const { getData, apiData, delData } = useNewApi();
@@ -12,9 +13,9 @@ const NewReactTable = (props) => {
   const [id, setId] = useState(null);
 
   if (url === "screens") {
-    var a = "Screens";
+    a = "Screens";
   } else if (url === "roles") {
-    var a = "Roles";
+    a = "Roles";
   }
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const NewReactTable = (props) => {
     if (id !== null) {
       delData(id);
       getData(url);
-      console.log("whatttttt");
+      // console.log("whatttttt");
     }
   }, id);
 
@@ -108,7 +109,7 @@ const NewReactTable = (props) => {
           </table>
         </div>
       ) : (
-        <h2>Loading....</h2>
+        <h2 className="text-primary">Loading....</h2>
       )}
     </>
   );

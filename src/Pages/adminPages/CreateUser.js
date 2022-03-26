@@ -1,5 +1,5 @@
 import React from "react";
-import AddModal from "../../Components/AddModal";
+import AddModal from "../../Components/BootstrapModalEdited/AddModal";
 import NewReactTable from "../../Components/NewReactTable";
 
 const CreateUser = () => {

@@ -1,30 +1,19 @@
-import React, { useRef, useEffect } from "react";
-import { MdModeEditOutline } from "react-icons/md";
-import useNewApi from "../CustomHooks/useNewApi";
+import React, { useRef, useState, useEffect } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
+import useNewApi from "../../CustomHooks/useNewApi";
+import { CommonForm, UserForm } from "./ReusedForm";
 
-const UpdateModal = (props) => {
-  const { name, extra, refname, refemail, url, id } = props;
-  const { putData, getData } = useNewApi();
+const AddModal = (props) => {
+  const { postData, getData } = useNewApi();
 
   const sname = useRef(null);
   const sdescription = useRef(null);
 
   // const uname = useRef(null);
   // const uemail = useRef(null);
-  const pswd = useRef(null);
+  const upswd = useRef(null);
 
-  const fixIt = refname.split(" ");
-  const fixedIt = fixIt.join("");
-
-  useEffect(() => {
-    sname.current.placeholder = refname;
-    sdescription.current.placeholder = refemail;
-    if (url === "screens") {
-      sname.current.value = refname;
-    }
-  });
-
-  const common = (
+  /*  const common = (
     <>
       <div>
         <div className="row mt-3">
@@ -80,51 +69,52 @@ const UpdateModal = (props) => {
             <label>Password</label>
           </div>
           <div className="col-8">
-            <input ref={pswd} type="text" placeholder="Enter Password" />
+            <input ref={upswd} type="text" placeholder="Enter Password" />
           </div>
         </div>
       </div>
     </>
-  );
+  ); */
 
   const submitData = () => {
     var name = sname.current.value;
     var description = sdescription.current.value;
-    putData(`${url}/${id}`, { name, description });
-    sname.current.placeholder = props.refname;
-    sdescription.current.placeholder = props.refemail;
+    postData(props.url, { name, description });
     // getData(props.url);
   };
   const submitUser = () => {
     var name = sname.current.value;
     var email = sdescription.current.value;
-    var password = pswd.current.value;
-    putData(`${url}/${id}`, { name, email, password });
-    sname.current.placeholder = props.refname;
-    sdescription.current.placeholder = props.refemail;
+    var password = upswd.current.value;
+    postData(props.url, { name, email, password });
     // console.log(name, email, password);
   };
 
   return (
     <>
-      <div>
-        <i data-bs-toggle="modal" data-bs-target={`#${fixedIt}`}>
-          <MdModeEditOutline />
+      <button
+        className="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#AddModal"
+      >
+        <i>
+          <AiOutlinePlus />
         </i>
-      </div>
+        {" Add " + props.name}
+      </button>
 
       <div
-        className={`modal fade ${fixedIt}`}
-        id={fixedIt}
+        className="modal fade AddModal"
+        id="AddModal"
         tabindex="-1"
-        aria-labelledby={`${fixedIt}Label`}
+        aria-labelledby="AddModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <div className="UpdateModal-header">
-                <h3>{"Update " + props.name}</h3>
+              <div className="AddModal-header">
+                <h3>{"Add " + props.name}</h3>
               </div>
               <button
                 type="button"
@@ -135,28 +125,28 @@ const UpdateModal = (props) => {
             </div>
             <div className="modal-body">
               <form>
-                <div className="container UpdateModal-body text-start">
-                  {props.extra === true ? addUser : common}
+                <div className="container AddModal-body text-start">
+                  {props.extra === true ? (
+                    <UserForm
+                      sname={sname}
+                      sdescription={sdescription}
+                      upswd={upswd}
+                    />
+                  ) : (
+                    <CommonForm sname={sname} sdescription={sdescription} />
+                  )}
                 </div>
               </form>
             </div>
             <div className="modal-footer">
-              <div className={`text-end ${fixedIt}-footer`}>
+              <div className="text-end AddModal-footer">
                 {props.extra === true ? (
-                  <button
-                    className="btn btn-primary"
-                    onClick={submitUser}
-                    data-bs-dismiss="modal"
-                  >
-                    Update User
+                  <button className="btn btn-primary" onClick={submitUser}>
+                    Add User
                   </button>
                 ) : (
-                  <button
-                    className="btn btn-primary"
-                    onClick={submitData}
-                    data-bs-dismiss="modal"
-                  >
-                    Update
+                  <button className="btn btn-primary" onClick={submitData}>
+                    Add
                   </button>
                 )}
                 <button
@@ -175,4 +165,4 @@ const UpdateModal = (props) => {
   );
 };
 
-export default UpdateModal;
+export default AddModal;

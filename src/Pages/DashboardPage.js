@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import profilePic from "../assets/images/profile-pic.jpg";
 
@@ -17,6 +17,10 @@ const DashboardPage = () => {
     localStorage.removeItem("token");
     navigate("/");
   };
+  useEffect(() => {
+    navigate("/user");
+  }, []);
+
   return (
     <div>
       <div className=" DashboardPage">
@@ -48,6 +52,12 @@ const DashboardPage = () => {
                 </li>
               </ul>
             </div>
+            <Link
+              style={{ color: "black", textDecoration: "none" }}
+              to="products/"
+            >
+              <h2>Product Page</h2>
+            </Link>
           </div>
           <div className="mt-3">
             <button className="btn btn-danger" onClick={clearToken}>
