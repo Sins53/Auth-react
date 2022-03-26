@@ -1,25 +1,26 @@
-import { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
-import useNewApi from "../CustomHooks/useNewApi";
 
 const DelModal = (props) => {
   const { url, id, name, setId } = props;
-  const { apiData, delData } = useNewApi();
   const handleDelete = () => {
     setId(`${url}/${id}`);
   };
 
+  const fixIt = name.split(" ");
+  const fixedIt = fixIt.join("");
+  // console.log(name);
+
   return (
     <div>
-      <i data-bs-toggle="modal" data-bs-target={`#${props.name}`}>
+      <i data-bs-toggle="modal" data-bs-target={`#${fixedIt + url}`}>
         <FaTrashAlt />
       </i>
 
       <div
-        className={`modal fade ${props.name}`}
-        id={props.name}
+        className={`modal fade ${fixedIt + url}`}
+        id={fixedIt + url}
         tabindex="-1"
-        aria-labelledby={`${props.name}Label`}
+        aria-labelledby={`${fixedIt + url}Label`}
         aria-hidden="true"
       >
         <div className="modal-dialog">
@@ -37,7 +38,7 @@ const DelModal = (props) => {
               <h3>Are you sure you want to delete? {props.name}</h3>
             </div>
             <div className="modal-footer">
-              <div className={`text-end ${name}-footer`}>
+              <div className={`text-end ${fixedIt + url}-footer`}>
                 <button
                   className="btn btn-danger"
                   onClick={() => handleDelete()}

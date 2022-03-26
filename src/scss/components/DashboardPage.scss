@@ -1,6 +1,6 @@
 .DashboardPage {
   &-sidebar {
-    background-color: red;
+    background-color: rgba(70, 1, 197, 0.753);
     position: fixed;
     top: 0;
     bottom: 0;
@@ -11,7 +11,7 @@
     width: 20%;
     border-right: 1px solid #eee;
     &-links {
-      background-color: green;
+      background-color: rgba(147, 98, 236, 0.753);
       li {
         list-style-type: none;
         margin-bottom: 1rem;
@@ -22,5 +22,12 @@
     margin-left: 25%;
     margin-top: 1.75rem;
     margin-right: 10%;
+  }
+  .img-responsive {
+    // height: auto;
+    // width: auto;
+    max-height: 10rem;
+    max-width: 15rem;
+    border-radius: 50%;
   }
 }

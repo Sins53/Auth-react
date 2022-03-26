@@ -1,6 +1,5 @@
 import React from "react";
 import AddModal from "../../Components/AddModal";
-import DelModal from "../../Components/DelModal";
 import NewReactTable from "../../Components/NewReactTable";
 
 const CreateUser = () => {
@@ -13,7 +12,6 @@ const CreateUser = () => {
         <AddModal name={"User"} extra={true} url={"user"} />
       </div>
       <NewReactTable num={0} url={"user"} method={"GET"} />
-      <DelModal />
     </>
   );
 };

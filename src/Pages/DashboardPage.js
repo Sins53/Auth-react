@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import CreateUser from "./adminPages/CreateUser";
 import RoleSetting from "./adminPages/RoleSetting";
 import ScreenSetup from "./adminPages/ScreenSetup";
+import profilePic from "../assets/images/profile-pic.jpg";
 
 const DashboardPage = () => {
   const [display, setDisplay] = useState("none");
@@ -30,12 +31,18 @@ const DashboardPage = () => {
     <div>
       <div className=" DashboardPage">
         <div className="DashboardPage-sidebar">
-          <div className=" text-center">LOGO</div>
+          <div className=" text-center">
+            <img className="img-responsive" src={profilePic} alt="" />
+          </div>
           <div className="mt-4">
             <Link style={{ color: "black", textDecoration: "none" }} to="/home">
               <h2>Home</h2>
             </Link>
-            <button className="btn" onClick={toggleDisplay}>
+            <button
+              className="btn mt-2"
+              onClick={toggleDisplay}
+              style={{ padding: 0 }}
+            >
               <h2>User Setting</h2>
             </button>
             <div className="DashboardPage-sidebar-links" style={{ display }}>
@@ -67,7 +74,7 @@ const DashboardPage = () => {
         <div className="DashboardPage-main">
           {DisplayPage.map((item) => {
             return item.id === num ? (
-              <div className="container">
+              <div>
                 <item.name />
               </div>
             ) : null;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useNewApi from "../CustomHooks/useNewApi";
 import DelModal from "./DelModal";
+import UpdateModal from "./UpdateModal";
 
 const NewReactTable = (props) => {
   var i = 0;
@@ -9,6 +10,12 @@ const NewReactTable = (props) => {
   const { getData, apiData, delData } = useNewApi();
 
   const [id, setId] = useState(null);
+
+  if (url === "screens") {
+    var a = "Screens";
+  } else if (url === "roles") {
+    var a = "Roles";
+  }
 
   useEffect(() => {
     setValue(apiData);
@@ -63,12 +70,36 @@ const NewReactTable = (props) => {
                     <td>{item.name}</td>
                     <td>{item.description ? item.description : item.email}</td>
                     <td>
-                      <DelModal
-                        url={url}
-                        name={item.name}
-                        id={item.id}
-                        setId={setId}
-                      />
+                      <div className="row">
+                        <div className="col">
+                          <DelModal
+                            url={url}
+                            name={item.name}
+                            id={item.id}
+                            setId={setId}
+                          />
+                        </div>
+                        <div className="col">
+                          {url === "user" ? (
+                            <UpdateModal
+                              name={"User"}
+                              extra={true}
+                              url={"user"}
+                              refname={item.name}
+                              refemail={item.email}
+                              id={item.id}
+                            />
+                          ) : (
+                            <UpdateModal
+                              name={a}
+                              url={url}
+                              refname={item.name}
+                              refemail={item.description}
+                              id={item.id}
+                            />
+                          )}
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 );

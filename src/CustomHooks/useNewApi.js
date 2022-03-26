@@ -6,26 +6,24 @@ const useNewApi = () => {
 
   const [apiData, setApiData] = useState(null);
 
-  var token = null;
-  // var apiData = null;
-  var message = null;
+  // var token = null;
 
-  function getToken(url, body) {
-    if (body !== null) {
-      fetch(baseUrl + url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: body ? JSON.stringify(body) : null,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          token = data;
-        });
-    }
-    return token;
-  }
+  // function getToken(url, body) {
+  //   if (body !== null) {
+  //     fetch(baseUrl + url, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: body ? JSON.stringify(body) : null,
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         token = data;
+  //       });
+  //   }
+  //   return token;
+  // }
 
   function getData(url) {
     fetch(baseUrl + url, {
@@ -41,7 +39,6 @@ const useNewApi = () => {
       });
     // console.log(apiData, "----------------------");
   }
-
   async function delData(url) {
     if (isToken !== null) {
       await fetch(baseUrl + url, {
@@ -60,7 +57,6 @@ const useNewApi = () => {
         });
     }
   }
-
   function postData(url, body) {
     if (isToken !== null) {
       fetch(baseUrl + url, {
@@ -81,8 +77,28 @@ const useNewApi = () => {
     }
     // return message;
   }
+  function putData(url, body) {
+    if (isToken !== null) {
+      fetch(baseUrl + url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + isToken,
+        },
+        body: body ? JSON.stringify(body) : null,
+        // body: body ? JSON.stringify(body) : undefined,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // message = data.message;
+          // console.log(data.message);
+          alert(data.message);
+        });
+    }
+    // return message;
+  }
 
-  return { getToken, getData, delData, postData, apiData };
+  return { /* getToken, */ getData, delData, postData, apiData, putData };
 };
 
 export default useNewApi;
