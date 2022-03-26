@@ -26,7 +26,7 @@ const DisplayProducts = () => {
           <div className="row">
             {value.data.map((item) => {
               return (
-                <div className="col-4">
+                <div className="col-4 mt-4">
                   <div className="card">
                     <Link to={`/products/${item.id}`}>
                       <img

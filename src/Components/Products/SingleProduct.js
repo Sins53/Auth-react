@@ -87,9 +87,9 @@ const SingleProduct = () => {
             </div>
           </div>
 
-          <div style={{ display: displayModal }}>
+          <div className="mt-5" style={{ display: displayModal }}>
             <form>
-              <div className="container UpdateModal-body text-start">
+              <div className="container UpdateModal-body text-start mt-5">
                 <div>
                   <div className="row mt-3">
                     <div className="col-4">
@@ -115,7 +115,7 @@ const SingleProduct = () => {
                   </div>
                 </div>
                 <div>
-                  <div className="row mt-3">
+                  <div className="row mt-4">
                     <div className="col-4">
                       <label>Image Link</label>
                     </div>
@@ -141,16 +141,14 @@ const SingleProduct = () => {
               </div>
             </form>
 
-            <button
-              className="btn btn-primary"
-              data-bs-dismiss="modal"
-              onClick={updateProduct}
-            >
-              Update
-            </button>
-            <button className="btn btn-danger" onClick={close}>
-              Close
-            </button>
+            <div className="mt-2 ProductUpdateForm">
+              <button className="btn btn-primary" onClick={updateProduct}>
+                Update
+              </button>
+              <button className="btn btn-danger" onClick={close}>
+                Close
+              </button>
+            </div>
           </div>
         </>
       ) : (
