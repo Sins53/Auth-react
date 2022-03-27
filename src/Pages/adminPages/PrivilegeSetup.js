@@ -23,13 +23,14 @@ const PrivilegeSetup = () => {
 
   useEffect(() => {
     dispatch(fetchScreen());
+    getData(`roles/${id}`);
     setValue(apiData);
     // console.log(unique);
   }, [apiData]);
 
-  useEffect(() => {
-    getData(`roles/${id}`);
-  }, [id]);
+  // useEffect(() => {
+  //   getData(`roles/${id}`);
+  // }, [id]);
 
   useEffect(() => {
     setUnique(screenData);
@@ -46,7 +47,7 @@ const PrivilegeSetup = () => {
   };
 
   const nextDisplay = () => {
-    console.log(screenName);
+    // console.log(screenName);
     var a = screenName.current.children[0].outerText;
     var b = screenPrivleges.current.children[0].outerText;
     var arr = b.split(/\r?\n/);
@@ -62,11 +63,11 @@ const PrivilegeSetup = () => {
         obj = { ...obj, delete: true };
       }
     });
-    console.log(obj);
+    // console.log(obj);
     abc = {
       [a]: obj,
     };
-    console.log(abc);
+    // console.log(abc);
     arr123 = priv;
     arr123.push(abc);
     setPriv(arr123);
@@ -124,11 +125,10 @@ const PrivilegeSetup = () => {
               </div>
             </div>
           </>
-          {priv
-            ? priv.map((item) => {
-                return <div>{JSON.stringify(item)}</div>;
-              })
-            : null}
+          {priv.map((item) => {
+            return <div>{JSON.stringify(item)}</div>;
+          })}
+
           {/* <div>{JSON.stringify(priv)}</div> */}
           <div className="mt-5 col-md-12 text-center">
             <button className="btn btn-primary" onClick={postPrivleges}>
