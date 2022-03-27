@@ -13,6 +13,8 @@ const PrivilegeSetup = () => {
   const [unique, setUnique] = useState([]);
   const { getData, apiData, postData } = useNewApi();
 
+  const [priv, setPriv] = useState([]);
+
   const screenName = useRef(null);
   const screenPrivleges = useRef(null);
 
@@ -21,19 +23,66 @@ const PrivilegeSetup = () => {
 
   useEffect(() => {
     dispatch(fetchScreen());
-    getData(`roles/${id}`);
     setValue(apiData);
     // console.log(unique);
   }, [apiData]);
+
+  useEffect(() => {
+    getData(`roles/${id}`);
+  }, [id]);
 
   useEffect(() => {
     setUnique(screenData);
   }, [screenData]);
   // console.log(unique);
 
-  const nextDisplay = () => {
-    console.log(screenName.current.children[0].outerText);
+  var abc = null;
+  var arr123 = [];
+  var obj = {
+    create: false,
+    read: false,
+    update: false,
+    delete: false,
   };
+
+  const nextDisplay = () => {
+    console.log(screenName);
+    var a = screenName.current.children[0].outerText;
+    var b = screenPrivleges.current.children[0].outerText;
+    var arr = b.split(/\r?\n/);
+    // console.log(arr);
+    arr.forEach((item) => {
+      if (item === "Create") {
+        obj = { ...obj, create: true };
+      } else if (item === "Read") {
+        obj = { ...obj, read: true };
+      } else if (item === "Update") {
+        obj = { ...obj, update: true };
+      } else if (item === "Delete") {
+        obj = { ...obj, delete: true };
+      }
+    });
+    console.log(obj);
+    abc = {
+      [a]: obj,
+    };
+    console.log(abc);
+    arr123 = priv;
+    arr123.push(abc);
+    setPriv(arr123);
+  };
+
+  const clearPrivleges = () => {
+    setPriv([]);
+  };
+  const postPrivleges = () => {
+    // console.log({ id, mapping: { priv } });
+    // console.log(priv);
+    postData("roles/screen/mapping", { id, mapping: { priv } });
+    setPriv([]);
+    // console.log(priv);
+  };
+
   var selectScreenName = [];
   const screens = unique.forEach((item) => {
     selectScreenName.push({ value: item.name, label: item.name });
@@ -75,6 +124,20 @@ const PrivilegeSetup = () => {
               </div>
             </div>
           </>
+          {priv
+            ? priv.map((item) => {
+                return <div>{JSON.stringify(item)}</div>;
+              })
+            : null}
+          {/* <div>{JSON.stringify(priv)}</div> */}
+          <div className="mt-5 col-md-12 text-center">
+            <button className="btn btn-primary" onClick={postPrivleges}>
+              Save Privlegges
+            </button>
+            <button className="btn btn-danger ml-4" onClick={clearPrivleges}>
+              Clear
+            </button>
+          </div>
         </>
       ) : (
         <h2>Loading...</h2>
@@ -85,3 +148,16 @@ const PrivilegeSetup = () => {
 };
 
 export default PrivilegeSetup;
+
+//use this for multiple array field
+
+// const target = { a: 1, b: 2 };
+// const source = { b: 4, c: 5 };
+
+// const returnedTarget = Object.assign(target, source);
+
+// console.log(target);
+// // expected output: Object { a: 1, b: 4, c: 5 }
+
+// console.log(returnedTarget);
+// // expected output: Object { a: 1, b: 4, c: 5 }

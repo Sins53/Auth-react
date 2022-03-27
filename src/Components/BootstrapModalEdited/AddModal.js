@@ -84,8 +84,10 @@ const AddModal = (props) => {
     var name = sname.current.value;
     var description = sdescription.current.value;
     postData(props.url, { name, description });
+
     dispatch(dataAdded());
-    // getData(props.url);
+    sname.current.value = "";
+    sdescription.current.value = "";
   };
   const submitUser = () => {
     var name = sname.current.value;
@@ -94,6 +96,9 @@ const AddModal = (props) => {
     postData(props.url, { name, email, password });
     dispatch(dataAdded());
     // console.log(name, email, password);
+    sname.current.value = "";
+    sdescription.current.value = "";
+    upswd.current.value = "";
   };
 
   return (
@@ -147,19 +152,11 @@ const AddModal = (props) => {
             <div className="modal-footer">
               <div className="text-end AddModal-footer">
                 {props.extra === true ? (
-                  <button
-                    className="btn btn-primary"
-                    data-bs-dismiss="modal"
-                    onClick={submitUser}
-                  >
+                  <button className="btn btn-primary" onClick={submitUser}>
                     Add User
                   </button>
                 ) : (
-                  <button
-                    className="btn btn-primary"
-                    data-bs-dismiss="modal"
-                    onClick={submitData}
-                  >
+                  <button className="btn btn-primary" onClick={submitData}>
                     Add
                   </button>
                 )}

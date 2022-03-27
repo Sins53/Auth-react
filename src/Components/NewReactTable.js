@@ -114,9 +114,9 @@ const NewReactTable = (props) => {
                             />
                           )}
                         </div>
-                        {url === "roles" ? (
+                        {url === "roles" || url == "user" ? (
                           <div className="col">
-                            <Link to={`/roles/${item.id}`}>
+                            <Link to={`/${url}/${item.id}`}>
                               <GrUserSettings />
                             </Link>
                           </div>
