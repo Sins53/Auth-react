@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import useNewApi from "../CustomHooks/useNewApi";
 import DelModal from "./BootstrapModalEdited/DelModal";
 import UpdateModal from "./BootstrapModalEdited/UpdateModal";
+import { GrUserSettings } from "react-icons/gr";
+import { Link } from "react-router-dom";
 
 const NewReactTable = (props) => {
   var a = "",
@@ -100,6 +102,13 @@ const NewReactTable = (props) => {
                             />
                           )}
                         </div>
+                        {url === "roles" ? (
+                          <div className="col">
+                            <Link to={`/roles/${item.id}`}>
+                              <GrUserSettings />
+                            </Link>
+                          </div>
+                        ) : null}
                       </div>
                     </td>
                   </tr>

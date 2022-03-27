@@ -9,7 +9,6 @@ const SingleProduct = () => {
 
   const [displayModal, setDisplayModal] = useState("none");
 
-  const modal = useRef(null);
   const pname = useRef(null);
   const pdescription = useRef(null);
   const pimg = useRef(null);

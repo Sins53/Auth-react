@@ -7,6 +7,7 @@ import RoleSetting from "./Pages/adminPages/RoleSetting";
 import ScreenSetup from "./Pages/adminPages/ScreenSetup";
 import ProductsPage from "./Pages/ProductsPage";
 import SingleProduct from "./Components/Products/SingleProduct";
+import PrivilegeSetup from "./Pages/adminPages/PrivilegeSetup";
 
 function App() {
   const routes = [
@@ -19,6 +20,7 @@ function App() {
     { link: "user/", name: CreateUser },
     { link: "screens/", name: ScreenSetup },
     { link: "roles/", name: RoleSetting },
+    { link: "/roles/:id", name: PrivilegeSetup },
     { link: "products/", name: ProductsPage },
     { link: "/products/:id", name: SingleProduct },
   ];

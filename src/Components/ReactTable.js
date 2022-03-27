@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+/* import React, { useEffect, useState } from "react";
 import { useTable } from "react-table";
 import useApi from "../CustomHooks/useApi";
 
@@ -107,3 +107,4 @@ const ReactTable = (props) => {
 };
 
 export default ReactTable;
+ */
