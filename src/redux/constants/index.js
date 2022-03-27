@@ -1,0 +1,4 @@
+export const SCREEN_LIST_FETCHING = "SCREEN_LIST_FETCHING";
+
+export const DATA_ADDED = "DATA_ADDED";
+export const DATA_UPDATED = "DATA_UPDATED";

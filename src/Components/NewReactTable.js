@@ -4,8 +4,13 @@ import DelModal from "./BootstrapModalEdited/DelModal";
 import UpdateModal from "./BootstrapModalEdited/UpdateModal";
 import { GrUserSettings } from "react-icons/gr";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { dataUpdated } from "../redux/action/dataAdded";
 
 const NewReactTable = (props) => {
+  const dispatch = useDispatch();
+  const added = useSelector((state) => state.added.addedData);
+
   var a = "",
     i = 0;
   const { num, url } = props;
@@ -19,6 +24,12 @@ const NewReactTable = (props) => {
   } else if (url === "roles") {
     a = "Roles";
   }
+  useEffect(() => {
+    if (added === true) {
+      getData(url);
+      dispatch(dataUpdated());
+    }
+  }, [added]);
 
   useEffect(() => {
     setValue(apiData);
@@ -26,13 +37,14 @@ const NewReactTable = (props) => {
   }, [apiData]); ///why []
 
   useEffect(() => {
+    // console.log("hey");
     getData(url);
     if (id !== null) {
       delData(id);
       getData(url);
       // console.log("whatttttt");
     }
-  }, id);
+  }, [id]);
 
   const values = [
     {

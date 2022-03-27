@@ -2,9 +2,13 @@ import React, { useRef, useState, useEffect } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import useNewApi from "../../CustomHooks/useNewApi";
 import { CommonForm, UserForm } from "./ReusedForm";
+import { useDispatch } from "react-redux";
+import { dataAdded } from "../../redux/action/dataAdded";
 
 const AddModal = (props) => {
-  const { postData, getData } = useNewApi();
+  const { postData } = useNewApi();
+
+  const dispatch = useDispatch();
 
   const sname = useRef(null);
   const sdescription = useRef(null);
@@ -80,6 +84,7 @@ const AddModal = (props) => {
     var name = sname.current.value;
     var description = sdescription.current.value;
     postData(props.url, { name, description });
+    dispatch(dataAdded());
     // getData(props.url);
   };
   const submitUser = () => {
@@ -87,6 +92,7 @@ const AddModal = (props) => {
     var email = sdescription.current.value;
     var password = upswd.current.value;
     postData(props.url, { name, email, password });
+    dispatch(dataAdded());
     // console.log(name, email, password);
   };
 
@@ -141,11 +147,19 @@ const AddModal = (props) => {
             <div className="modal-footer">
               <div className="text-end AddModal-footer">
                 {props.extra === true ? (
-                  <button className="btn btn-primary" onClick={submitUser}>
+                  <button
+                    className="btn btn-primary"
+                    data-bs-dismiss="modal"
+                    onClick={submitUser}
+                  >
                     Add User
                   </button>
                 ) : (
-                  <button className="btn btn-primary" onClick={submitData}>
+                  <button
+                    className="btn btn-primary"
+                    data-bs-dismiss="modal"
+                    onClick={submitData}
+                  >
                     Add
                   </button>
                 )}
