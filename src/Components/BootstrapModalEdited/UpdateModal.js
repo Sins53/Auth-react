@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from "react";
 import { MdModeEditOutline } from "react-icons/md";
 import useNewApi from "../../CustomHooks/useNewApi";
 import { CommonForm, UserForm } from "./ReusedForm";
+import { useDispatch } from "react-redux";
+import { dataAdded } from "../../redux/action/dataAdded";
 
 const UpdateModal = (props) => {
   const { name, extra, refname, refemail, url, id } = props;
@@ -11,23 +13,24 @@ const UpdateModal = (props) => {
   const sdescription = useRef(null);
   const pswd = useRef(null);
 
+  const dispatch = useDispatch();
+
   const fixIt = refname.split(" ");
   const fixedIt = fixIt.join("");
 
   useEffect(() => {
-    sname.current.placeholder = refname;
-    sdescription.current.placeholder = refemail;
-    if (url === "screens") {
-      sname.current.value = refname;
-    }
-  });
+    sname.current.value = refname;
+    sdescription.current.value = refemail;
+    dispatch(dataAdded());
+  }, [id]);
 
   const submitData = () => {
     var name = sname.current.value;
     var description = sdescription.current.value;
     putData(`${url}/${id}`, { name, description });
-    sname.current.placeholder = props.refname;
-    sdescription.current.placeholder = props.refemail;
+    sname.current.value = "";
+    sdescription.current.value = "";
+    dispatch(dataAdded());
     // getData(props.url);
   };
   const submitUser = () => {
@@ -35,8 +38,9 @@ const UpdateModal = (props) => {
     var email = sdescription.current.value;
     var password = pswd.current.value;
     putData(`${url}/${id}`, { name, email, password });
-    sname.current.placeholder = props.refname;
-    sdescription.current.placeholder = props.refemail;
+    sname.current.value = "";
+    sdescription.current.value = "";
+    dispatch(dataAdded());
     // console.log(name, email, password);
   };
 
@@ -85,7 +89,7 @@ const UpdateModal = (props) => {
             </div>
             <div className="modal-footer">
               <div className={`text-end UpdateModal-footer ${fixedIt}-footer`}>
-                {props.extra === true ? (
+                {extra === true ? (
                   <button
                     className="btn btn-primary"
                     onClick={submitUser}
