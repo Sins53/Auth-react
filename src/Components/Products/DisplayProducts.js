@@ -22,36 +22,43 @@ const DisplayProducts = () => {
   return (
     <>
       {value?.data ? (
-        <div className="container mt-5">
-          <div className="row">
-            {value.data.map((item) => {
-              return (
-                <div className="col-4 mt-4">
-                  <div className="card">
-                    <Link to={`/products/${item.id}`}>
-                      <img
-                        className="card-img mb-3"
-                        src={profilePic}
-                        // src={item.image}
-                        alt="Denim Jeans"
-                      />
-                    </Link>
-                    <h2>{item.name}</h2>
-                    <h4 className="text-end me-4 text-primary">
-                      Stock : {item.quantity}
-                    </h4>
-                    <p className="text-start card-description">
-                      {item.description}
-                    </p>
-                    <p>
-                      <button className="btn btn-primary">Add to Cart</button>
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+        <>
+          <div className="mt-5 mb-2">
+            <h2 className="text-primary">
+              Note: Click on item image to Edit/Delete
+            </h2>
           </div>
-        </div>
+          <div className="container mt-5">
+            <div className="row">
+              {value.data.map((item) => {
+                return (
+                  <div className="col-4 mt-4">
+                    <div className="card">
+                      <Link to={`/products/${item.id}`}>
+                        <img
+                          className="card-img mb-3"
+                          src={profilePic}
+                          // src={item.image}
+                          alt="Denim Jeans"
+                        />
+                      </Link>
+                      <h2>{item.name}</h2>
+                      <h4 className="text-end me-4 text-primary">
+                        Stock : {item.quantity}
+                      </h4>
+                      <p className="text-start card-description">
+                        {item.description}
+                      </p>
+                      <p>
+                        <button className="btn btn-primary">Add to Cart</button>
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </>
       ) : (
         <h2>Loading....</h2>
       )}

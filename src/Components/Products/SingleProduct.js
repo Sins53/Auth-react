@@ -18,11 +18,14 @@ const SingleProduct = () => {
   const { getData, apiData, delData, putData } = useNewApi();
 
   useEffect(() => {
-    getData(`product/${id}`);
     setValue(apiData);
     // console.log(value);
     // console.log(apiData);
   }, [apiData]);
+
+  useEffect(() => {
+    getData(`product/${id}`);
+  }, [id]);
 
   const display = () => {
     setDisplayModal("block");
@@ -51,6 +54,7 @@ const SingleProduct = () => {
     // console.log(name, description, image, quantity);
     // console.log(typeof quantity);
     putData(url, { name, description, image, quantity });
+    getData(`product/${id}`);
     close();
   };
 
